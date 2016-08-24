@@ -1,11 +1,8 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Julio.Model;
+using PlatanoApi.Model;
 
-namespace Julio.WebApi.Controllers
+namespace PlatanoApi.WebApi.Controllers
 {
     [Route("api/[controller]")]
     public class FetchCommandController : Controller
@@ -16,7 +13,8 @@ namespace Julio.WebApi.Controllers
             var cmd = new HomeAutomationCommand();
             cmd.TimeStamp = DateTime.Now;
             cmd.UserName = "jpozo";
-            cmd.Command = "TOGGLE-GARAGE-DOOR";
+            cmd.DeviceId = Guid.NewGuid();
+            cmd.Command = "OPEN";
             return cmd;
         }
     }
