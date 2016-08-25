@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using PlatanoApi.Model;
 
 namespace PlatanoApi
 {
@@ -36,6 +37,13 @@ namespace PlatanoApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Entity Framework
+            var connection = Configuration["Development:SqliteConnectionString"];
+            services.AddDbContext<PlatanoDbContext>(options => options.UseSqlite(connection));
+
+            // TODO: register a repository here to keep things decoupled
+
+            // MVC
             services.AddMvc();
         }
 

@@ -1,6 +1,6 @@
 namespace PlatanoApi.Model
 {
-    public enum AutomationCommandEnum
+    public enum CommandEnum
     {
         GarageDoor = 1001, Camera = 1002, Light = 1003
     };
