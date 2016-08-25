@@ -14,7 +14,8 @@ namespace PlatanoApi.WebApi.Controllers
             cmd.TimeStamp = DateTime.Now;
             cmd.UserName = "jpozo";
             cmd.DeviceId = Guid.NewGuid();
-            cmd.Command = "OPEN";
+            cmd.Command = AutomationCommandEnum.GarageDoor;
+            cmd.CommandArgs = "action=open";
             return cmd;
         }
     }
