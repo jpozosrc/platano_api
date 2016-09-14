@@ -16,6 +16,7 @@ namespace PlatanoApi
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
                 .UseStartup<Startup>()
+                .UseUrls("http://0.0.0.0:8079")
                 .Build();
 
             host.Run();
