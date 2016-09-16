@@ -24,16 +24,8 @@ namespace PlatanoApi.WebApi.Controllers
         }
 
         [HttpPost]
-        public void Add()
+        public void Add([FromBody] AutomationCommand cmd)
         {
-            //TODO: pass this value
-            var cmd = new AutomationCommand();
-            cmd.TimeStamp = DateTime.Now;
-            cmd.UserName = "jpozo";
-            cmd.DeviceId = Guid.NewGuid();
-            cmd.CommandText = "GARAGE-DOOR";
-            cmd.CommandArgs = "action=open";
-
             _context.AutomationCommand.Add(cmd);
             _context.SaveChanges();
         }
