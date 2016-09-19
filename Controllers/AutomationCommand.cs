@@ -1,7 +1,7 @@
-using System;
 using Microsoft.AspNetCore.Mvc;
 using PlatanoApi.Model;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace PlatanoApi.WebApi.Controllers
 {
@@ -17,10 +17,9 @@ namespace PlatanoApi.WebApi.Controllers
         }
 
         [HttpGet]
-        public AutomationCommand GetNextCommand()
+        public AutomationCommand[] GetNextCommand()
         {
-            var result = _context.AutomationCommand.First();
-            return result;
+            return _context.AutomationCommand.ToArray();
         }
 
         [HttpPost]
