@@ -2,37 +2,52 @@ using Microsoft.AspNetCore.Mvc;
 using PlatanoApi.Model;
 using System.Linq;
 using System;
+using Microsoft.Extensions.Logging;
 
 namespace PlatanoApi.WebApi.Controllers
 {
+    /// CRUD operations on the AutomationCommand database entity
     [Route("api/[controller]")]
-    public class AutomationCommandController : Controller
+    public class AutomationCommandController : ControllerBase
     {
-        private PlatanoDbContext _context;
-        public AutomationCommandController(PlatanoDbContext context)
+        private ILogger<AutomationCommandController> _logger;
+       
+        public AutomationCommandController(PlatanoDbContext dal, ILogger<AutomationCommandController> logger)
         {
-            // TODO: abstract this with a repository pattern
-            _context = context;
+            this.DAL = dal;
+            _logger = logger;
         }
 
-        [HttpGet]
-        public IActionResult Get()
+        [HttpGet("{id?}")]
+        public IActionResult Get([FromRoute] int? id)
         {
-            try
+            IActionResult result = NotFound();
+            
+            if(id == null)
             {
-                return Ok(_context.AutomationCommand.ToArray());
+                var items = this.DAL.AutomationCommand.ToArray();
+                
+                if(items.Length > 0)
+                    result = Ok(items);
+                else
+                    _logger.LogInformation($"Id '{id}' was not found.");
             }
-            catch(Exception ex)
+            else
             {
-                throw ex;
+                var item = this.DAL.AutomationCommand.SingleOrDefault(i => i.Id == id);
+                
+                if(item != null)
+                    result = Ok(item);
             }
+
+            return result;
         }
 
         [HttpPost]
-        public IActionResult Add([FromBody] AutomationCommand cmd)
+        public IActionResult Add([FromBody] AutomationCommand item)
         {
-            _context.AutomationCommand.Add(cmd);
-            _context.SaveChanges();
+            this.DAL.AutomationCommand.Add(item);
+            this.DAL.SaveChanges();
             return Ok();
         }
 
@@ -40,9 +55,16 @@ namespace PlatanoApi.WebApi.Controllers
         [Route("{id}")]
         public IActionResult Delete([FromRoute] int id)
         {
-            var cmd = _context.AutomationCommand.Where(i => i.Id == id).Single();
-            _context.AutomationCommand.Remove(cmd);
-            _context.SaveChanges();
+            var item = this.DAL.AutomationCommand.SingleOrDefault(i => i.Id == id);
+
+            if(item == null)
+            {
+                _logger.LogInformation($"Item with Id = '{id}' was not found.");
+                return NotFound();
+            }
+            
+            this.DAL.AutomationCommand.Remove(item);
+            this.DAL.SaveChanges();
             return Ok();
         }
     }
