@@ -1,10 +1,6 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -41,8 +37,6 @@ namespace PlatanoApi
             var connection = Configuration["Development:SqliteConnectionString"];
             services.AddDbContext<PlatanoDbContext>(options => options.UseSqlite(connection));
 
-            // TODO: register a repository here to keep things decoupled
-
             // MVC
             services.AddMvc();
         }
@@ -50,9 +44,10 @@ namespace PlatanoApi
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+            var configuration = Configuration.GetSection("Logging");
+            loggerFactory.AddConsole(configuration);
             loggerFactory.AddDebug();
-
+            
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

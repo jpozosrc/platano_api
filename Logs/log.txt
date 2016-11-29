@@ -1,0 +1,54 @@
+Project platano_api (.NETCoreApp,Version=v1.0) will be compiled because inputs were modified
+Compiling platano_api for .NETCoreApp,Version=v1.0
+
+Compilation succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time elapsed 00:00:01.8760933
+ 
+
+Hosting environment: Production
+Content root path: C:\src\dotnet_core\platano_api
+Now listening on: http://0.0.0.0:8079
+Application started. Press Ctrl+C to shut down.
+info: Microsoft.AspNetCore.Hosting.Internal.WebHost[1]
+      Request starting HTTP/1.1 GET http://localhost:8079/api/automationcommand/116  
+info: Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker[1]
+      Executing action method PlatanoApi.WebApi.Controllers.AutomationCommandController.Get (platano_api) with arguments (116) - ModelState is Valid
+warn: Microsoft.EntityFrameworkCore.Query.RelationalQueryCompilationContextFactory[8]
+      The LINQ expression 'SingleOrDefault()' could not be translated and will be evaluated locally. To configure this warning use the DbContextOptionsBuilder.ConfigureWarnings API (event id 'RelationalEventId.QueryClientEvaluationWarning'). ConfigureWarnings can be used when overriding the DbContext.OnConfiguring method or using AddDbContext on the application service provider.
+info: Microsoft.EntityFrameworkCore.Storage.Internal.RelationalCommandBuilderFactory[1]
+      Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      PRAGMA foreign_keys=ON;
+info: Microsoft.EntityFrameworkCore.Storage.Internal.RelationalCommandBuilderFactory[1]
+      Executed DbCommand (2ms) [Parameters=[@__id_0='?'], CommandType='Text', CommandTimeout='30']
+      SELECT "i"."Id", "i"."CommandArgs", "i"."CommandText", "i"."DeviceId", "i"."TimeStamp", "i"."UserName"
+      FROM "AutomationCommand" AS "i"
+      WHERE "i"."Id" = @__id_0
+      LIMIT 2
+info: Microsoft.AspNetCore.Mvc.Internal.ObjectResultExecutor[1]
+      Executing ObjectResult, writing value Microsoft.AspNetCore.Mvc.ControllerContext.
+info: Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker[2]
+      Executed action PlatanoApi.WebApi.Controllers.AutomationCommandController.Get (platano_api) in 1092.1412ms
+info: Microsoft.AspNetCore.Hosting.Internal.WebHost[2]
+      Request finished in 1323.4968ms 200 application/json; charset=utf-8
+info: Microsoft.AspNetCore.Hosting.Internal.WebHost[1]
+      Request starting HTTP/1.1 GET http://localhost:8079/api/automationcommand/11644  
+info: Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker[1]
+      Executing action method PlatanoApi.WebApi.Controllers.AutomationCommandController.Get (platano_api) with arguments (11644) - ModelState is Valid
+info: Microsoft.EntityFrameworkCore.Storage.Internal.RelationalCommandBuilderFactory[1]
+      Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      PRAGMA foreign_keys=ON;
+info: Microsoft.EntityFrameworkCore.Storage.Internal.RelationalCommandBuilderFactory[1]
+      Executed DbCommand (0ms) [Parameters=[@__id_0='?'], CommandType='Text', CommandTimeout='30']
+      SELECT "i"."Id", "i"."CommandArgs", "i"."CommandText", "i"."DeviceId", "i"."TimeStamp", "i"."UserName"
+      FROM "AutomationCommand" AS "i"
+      WHERE "i"."Id" = @__id_0
+      LIMIT 2
+info: Microsoft.AspNetCore.Mvc.StatusCodeResult[1]
+      Executing HttpStatusCodeResult, setting HTTP status code 404
+info: Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker[2]
+      Executed action PlatanoApi.WebApi.Controllers.AutomationCommandController.Get (platano_api) in 22.3147ms
+info: Microsoft.AspNetCore.Hosting.Internal.WebHost[2]
+      Request finished in 24.9361ms 404 
